@@ -1,9 +1,20 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Game {
   public ArrayList<Character> tileBag;
+  final HashSet<String> wordDictionary;
+
   public Game() {
     this.tileBag = generateTileBag();
+    this.wordDictionary = generateWordDictionary(Paths.get("words.txt"));
   }
 
   private static ArrayList<Character> generateTileBag() {
@@ -60,5 +71,21 @@ public class Game {
     }
 
     return tiles;
+  }
+
+  private static HashSet<String> generateWordDictionary(Path path) {
+    HashSet<String> words = new HashSet<String>();
+    final Charset ENCODING = StandardCharsets.UTF_8;
+
+    try (BufferedReader reader = Files.newBufferedReader(path, ENCODING)) {
+      String line = null;
+      while((line = reader.readLine()) != null) {
+        words.add(line);
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    return words;
   }
 }
