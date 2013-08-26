@@ -11,10 +11,16 @@ import java.util.HashSet;
 public class Game {
   public ArrayList<Character> tileBag;
   final HashSet<String> wordDictionary;
+  private Player players[];
+
 
   public Game() {
     this.tileBag = generateTileBag();
     this.wordDictionary = generateWordDictionary(Paths.get("words.txt"));
+    this.players = new Player[2];
+    this.players[0] = new Player("Player 1");
+    this.players[1] = new Player("Player 2");
+
   }
 
   private static ArrayList<Character> generateTileBag() {
