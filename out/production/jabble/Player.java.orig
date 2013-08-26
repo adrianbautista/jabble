@@ -4,8 +4,12 @@ import java.util.HashMap;
 public class Player {
     private String name;
     private int score = 0;
+<<<<<<< HEAD
     private HashMap wordsPlayed;
+=======
     private char[] tiles;
+
+>>>>>>> ae372067295aa3e6b7a4ca7b450bce1eab6a6a94
 
    /* constructor */
    public Player(String name) {
