@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Created with IntelliJ IDEA.
  * User: cgoodmac
@@ -8,12 +10,15 @@
 public class Player {
     private String name;
     private int score = 0;
-    private char[] tiles;
-
+    public ArrayList<Character> rack;
 
    /* constructor */
    public Player(String name) {
        name = name;
+       this.rack = new ArrayList<Character>(7);
+       for (int i = 0; i < 7; i++) {
+           Game.getTile(this);
+       }
    }
 
     public int getScore() {
@@ -22,5 +27,9 @@ public class Player {
 
     public String getName() {
         return name;
+    }
+
+    public ArrayList<Character> getRack(){
+       return rack;
     }
 }
