@@ -100,6 +100,49 @@ public class Game {
     HashMap<Character, Integer> points = new HashMap<>(26);
     for (int i = 1; i <= 10; i++ ) {
 
+      switch (i) {
+        case 1: points.put('a', i);
+                points.put('e', i);
+                points.put('i', i);
+                points.put('o', i);
+                points.put('t', i);
+                points.put('r', i);
+                points.put('n', i);
+                points.put('u', i);
+                points.put('s', i);
+                points.put('l', i);
+                break;
+
+        case 2: points.put('d', i);
+                points.put('g', i);
+                break;
+
+        case 3: points.put('b', i);
+                points.put('c', i);
+                points.put('m', i);
+                points.put('p', i);
+                break;
+
+        case 4: points.put('f', i);
+                points.put('h', i);
+                points.put('v', i);
+                points.put('w', i);
+                points.put('y', i);
+                break;
+
+        case 5: points.put('k', i);
+                break;
+
+        case 8: points.put('j', i);
+                points.put('x', i);
+                break;
+
+        case 10: points.put('q', i);
+                 points.put('z', i);
+                 break;
+      }
     }
+
+    return points;
   }
 }
