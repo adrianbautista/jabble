@@ -6,21 +6,22 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 
 public class Game {
   public ArrayList<Character> tileBag;
   final HashSet<String> wordDictionary;
   private Player players[];
-
+  final HashMap<Character, Integer> pointGuide;
 
   public Game() {
     this.tileBag = generateTileBag();
     this.wordDictionary = generateWordDictionary(Paths.get("words.txt"));
+    this.pointGuide = generatePointGuide();
     this.players = new Player[2];
     this.players[0] = new Player("Player 1");
     this.players[1] = new Player("Player 2");
-
   }
 
   private static ArrayList<Character> generateTileBag() {
@@ -93,5 +94,12 @@ public class Game {
     }
 
     return words;
+  }
+
+  private static HashMap<Character, Integer> generatePointGuide() {
+    HashMap<Character, Integer> points = new HashMap<>(26);
+    for (int i = 1; i <= 10; i++ ) {
+
+    }
   }
 }
