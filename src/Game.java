@@ -6,22 +6,24 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
 public class Game {
-  public ArrayList<Character> tileBag;
+  public static ArrayList<Character> tileBag;
   final HashSet<String> wordDictionary;
   private Player players[];
   final HashMap<Character, Integer> pointGuide;
 
   public Game() {
-    this.tileBag = generateTileBag();
+    tileBag = generateTileBag();
     this.wordDictionary = generateWordDictionary(Paths.get("words.txt"));
     this.pointGuide = generatePointGuide();
     this.players = new Player[2];
     this.players[0] = new Player("Player 1");
     this.players[1] = new Player("Player 2");
+    gamePrompt();
   }
 
   public boolean isWordReal(String word) {
@@ -81,7 +83,12 @@ public class Game {
       }
     }
 
+    Collections.shuffle(tiles);
     return tiles;
+  }
+
+  public static void getTile(Player player) {
+    player.rack.add(tileBag.remove(0));
   }
 
   private static HashSet<String> generateWordDictionary(Path path) {
@@ -149,4 +156,12 @@ public class Game {
 
     return points;
   }
+
+  public static void gamePrompt() {
+    boolean gameOn = true;
+
+    System.out.println("Sup");
+
+  }
+
 }

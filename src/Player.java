@@ -5,11 +5,15 @@ import java.util.Iterator;
 public class Player {
     private String name;
     private HashMap wordsPlayed;
-    private char[] tiles;
+    public ArrayList<Character> rack;
 
    /* constructor */
    public Player(String name) {
-       this.name = name;
+       name = name;
+       this.rack = new ArrayList<Character>(7);
+       for (int i = 0; i < 7; i++) {
+           Game.getTile(this);
+       }
        this.wordsPlayed = new HashMap();
    }
 
@@ -34,6 +38,10 @@ public class Player {
         return name;
     }
 
+    public ArrayList<Character> getRack(){
+       return rack;
+    }
+
     public void setWordsPlayed(String word, HashMap pointGuide) {
       char[] letters = word.toCharArray();
       int wordLength = letters.length;
@@ -53,5 +61,6 @@ public class Player {
         scoresArray.add(new Integer(wordScore));
         this.wordsPlayed.put(word, scoresArray);
       }
+
     }
 }
