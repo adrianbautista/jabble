@@ -12,14 +12,14 @@ import java.util.HashSet;
 
 public class Game {
   public static ArrayList<Character> tileBag;
-  final HashSet<String> wordDictionary;
+  public final HashSet<String> wordDictionary;
+  public final HashMap<Character, Integer> pointGuide;
   private Player players[];
-  final HashMap<Character, Integer> pointGuide;
 
   public Game() {
     tileBag = generateTileBag();
-    this.wordDictionary = generateWordDictionary(Paths.get("words.txt"));
-    this.pointGuide = generatePointGuide();
+    wordDictionary = generateWordDictionary(Paths.get("words.txt"));
+    pointGuide = generatePointGuide();
     this.players = new Player[2];
     this.players[0] = new Player("Player 1");
     this.players[1] = new Player("Player 2");
@@ -27,7 +27,7 @@ public class Game {
   }
 
   public boolean isWordReal(String word) {
-    return this.wordDictionary.contains(word);
+    return wordDictionary.contains(word);
   }
 
   private static ArrayList<Character> generateTileBag() {
