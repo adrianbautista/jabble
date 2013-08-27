@@ -160,7 +160,8 @@ public class Game {
   public static void gamePrompt() {
     boolean gameOn = true;
 
-    System.out.println("Sup");
+    System.out.println("Welcome to Jabble");
+    System.out.println("(s)how your rack, show (g)ame board, (p)lay a word, (q)uit");
 
   }
 
