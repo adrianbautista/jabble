@@ -23,6 +23,7 @@ public class Game {
     this.players = new Player[2];
     this.players[0] = new Player("Player 1");
     this.players[1] = new Player("Player 2");
+    gamePrompt();
   }
 
   public boolean isWordReal(String word) {
@@ -155,4 +156,12 @@ public class Game {
 
     return points;
   }
+
+  public static void gamePrompt() {
+    boolean gameOn = true;
+
+    System.out.println("Sup");
+
+  }
+
 }
