@@ -4,16 +4,16 @@ import java.util.HashMap;
 public class Player {
     private String name;
     private int score = 0;
+<<<<<<< HEAD
     private HashMap wordsPlayed;
-    public ArrayList<Character> rack;
+=======
+    private char[] tiles;
+
+>>>>>>> ae372067295aa3e6b7a4ca7b450bce1eab6a6a94
 
    /* constructor */
    public Player(String name) {
-       name = name;
-       this.rack = new ArrayList<Character>(7);
-       for (int i = 0; i < 7; i++) {
-           Game.getTile(this);
-       }
+       this.name = name;
        this.wordsPlayed = new HashMap();
    }
 
@@ -23,10 +23,6 @@ public class Player {
 
     public String getName() {
         return name;
-    }
-
-    public ArrayList<Character> getRack(){
-       return rack;
     }
 
     public void setWordsPlayed(String word, HashMap pointGuide) {
@@ -48,6 +44,5 @@ public class Player {
         scoresArray.add(new Integer(wordScore));
         this.wordsPlayed.put(word, scoresArray);
       }
-
     }
 }

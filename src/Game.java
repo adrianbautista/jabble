@@ -25,6 +25,10 @@ public class Game {
     this.players[1] = new Player("Player 2");
   }
 
+  public boolean isWordReal(String word) {
+    return this.wordDictionary.contains(word);
+  }
+
   private static ArrayList<Character> generateTileBag() {
     ArrayList<Character> tiles = new ArrayList<Character>(100);
 
