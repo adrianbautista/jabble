@@ -5,21 +5,19 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.*;
 
 public class Game {
   public static ArrayList<Character> tileBag = generateTileBag();
   public static final HashSet<String> wordDictionary = generateWordDictionary(Paths.get("words.txt"));
   public static final HashMap<Character, Integer> pointGuide = generatePointGuide();
+  public static Scanner scanner = new Scanner(System.in);
   private Player players[];
 
-  public Game() {
+  public Game(String p1, String p2) {
     this.players = new Player[2];
-    this.players[0] = new Player("Player 1");
-    this.players[1] = new Player("Player 2");
+    this.players[0] = new Player(p1);
+    this.players[1] = new Player(p2);
     gamePrompt();
   }
 
@@ -154,12 +152,19 @@ public class Game {
     return points;
   }
 
-  public static void gamePrompt() {
-    boolean gameOn = true;
-
+  public static Game initializationPrompt() {
     System.out.println("Welcome to Jabble");
-    System.out.println("(s)how your rack, show (g)ame board, (p)lay a word, (q)uit");
+    System.out.println("Player 1, please enter your name: ");
+    String player1Name = scanner.next();
 
+    System.out.println("Player 2, please enter your name: ");
+    String player2Name = scanner.next();
+
+    return new Game(player1Name, player2Name);
+  }
+
+  public static void gamePrompt() {
+    System.out.println("(s)how your rack, show (g)ame board, (p)lay a word, (q)uit");
   }
 
 }

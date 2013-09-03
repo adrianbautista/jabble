@@ -45,7 +45,7 @@ public class Player {
 
     public void setWordsPlayed() {
       for (int i = 0; i < this.wordsBeingPlayed.size(); i++) {
-        String word = this.wordsBeingPlayed.get(i);
+        String word = this.wordsBeingPlayed.remove(i);
         this.addWordPlayed(word, Game.pointGuide);
       }
     }
