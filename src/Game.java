@@ -12,7 +12,7 @@ import java.util.HashSet;
 
 public class Game {
   public static ArrayList<Character> tileBag;
-  public final HashSet<String> wordDictionary;
+  public static HashSet<String> wordDictionary;
   public final HashMap<Character, Integer> pointGuide;
   private Player players[];
 
@@ -26,7 +26,7 @@ public class Game {
     gamePrompt();
   }
 
-  public boolean isWordReal(String word) {
+  public static boolean isWordReal(String word) {
     return wordDictionary.contains(word);
   }
 

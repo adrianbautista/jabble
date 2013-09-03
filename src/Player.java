@@ -98,6 +98,8 @@ public class Player {
       return false;
     }
 
+    // add the intended word being made by player to wordsBeingPlayed
+
     public void finshTurn(char direction, int x, int y, Board board) {
       if (direction == 'r') {
         String mainHorizontalWord = board.checkForHorizontalWord(x, y);
@@ -111,5 +113,16 @@ public class Player {
           this.wordsBeingPlayed.add(mainVerticalWord);
         }
       }
+    }
+
+    // validate all wordsBeingPlayed with the dictionary
+
+    public boolean validateTurn() {
+      for (int i = 0; i < this.wordsBeingPlayed.size(); i++) {
+        if (Game.isWordReal(this.wordsBeingPlayed.get(i)) != true) {
+          return false;
+        }
+      }
+      return true;
     }
 }
