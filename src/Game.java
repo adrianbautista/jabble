@@ -11,15 +11,12 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 public class Game {
-  public static ArrayList<Character> tileBag;
-  public static HashSet<String> wordDictionary;
-  public final HashMap<Character, Integer> pointGuide;
+  public static ArrayList<Character> tileBag = generateTileBag();
+  public static final HashSet<String> wordDictionary = generateWordDictionary(Paths.get("words.txt"));
+  public static final HashMap<Character, Integer> pointGuide = generatePointGuide();
   private Player players[];
 
   public Game() {
-    tileBag = generateTileBag();
-    wordDictionary = generateWordDictionary(Paths.get("words.txt"));
-    pointGuide = generatePointGuide();
     this.players = new Player[2];
     this.players[0] = new Player("Player 1");
     this.players[1] = new Player("Player 2");

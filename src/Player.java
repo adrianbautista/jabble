@@ -43,7 +43,14 @@ public class Player {
        return rack;
     }
 
-    public void setWordsPlayed(String word, HashMap pointGuide) {
+    public void setWordsPlayed() {
+      for (int i = 0; i < this.wordsBeingPlayed.size(); i++) {
+        String word = this.wordsBeingPlayed.get(i);
+        this.addWordPlayed(word, Game.pointGuide);
+      }
+    }
+
+    public void addWordPlayed(String word, HashMap pointGuide) {
       char[] letters = word.toCharArray();
       int wordLength = letters.length;
       int wordScore = 0;
@@ -119,10 +126,14 @@ public class Player {
 
     public boolean validateTurn() {
       for (int i = 0; i < this.wordsBeingPlayed.size(); i++) {
-        if (Game.isWordReal(this.wordsBeingPlayed.get(i)) != true) {
+        String word = this.wordsBeingPlayed.get(i);
+        if (Game.isWordReal(word) != true) {
           return false;
         }
       }
+
+      setWordsPlayed();
+
       return true;
     }
 }
