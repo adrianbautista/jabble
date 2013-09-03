@@ -55,6 +55,96 @@ public class Board {
         return board;
     }
 
+    public boolean isSpaceOpen(int x, int y) {
+      if ((x > 14) || (y > 14)) {
+        return false;
+      }
+
+      char currentOccupier = this.board[x][y];
+
+      if (currentOccupier == '_') {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    public void addTileToBoard(char tile, int x, int y) {
+      this.board[x][y] = tile;
+    }
+
+    public String checkForVerticalWord(int x, int y) {
+        StringBuilder verticalWord = new StringBuilder();
+
+      switch (y) {
+        case 0:
+          while (checkSpace(x, y) != '_') {
+            verticalWord.append(this.board[x][y]);
+            y += 1;
+          }
+          break;
+
+        case 14:
+          while (checkSpace(x, y) != '_') {
+            verticalWord.insert(0, this.board[x][y]);
+            y -= 1;
+          }
+          break;
+
+        default:
+          int originalTile = y;
+          while (checkSpace(x, y) != '_') {
+            verticalWord.append(this.board[x][y]);
+            y += 1;
+          }
+          while (checkSpace(x, originalTile) != '_') {
+            verticalWord.insert(0, this.board[x][originalTile]);
+            originalTile -= 1;
+          }
+          break;
+      }
+
+      return verticalWord.toString();
+    }
+
+    public char checkSpace(int x, int y) {
+      return this.board[x][y];
+    }
+
+    public String checkForHorizontalWord(int x, int y) {
+      StringBuilder horizontalWord = new StringBuilder();
+
+      switch (x) {
+        case 0:
+          while (checkSpace(x, y) != '_') {
+            horizontalWord.append(this.board[x][y]);
+            x +=1;
+          }
+          break;
+
+        case 14:
+          while (checkSpace(x, y) != '_') {
+            horizontalWord.insert(0, this.board[x][y]);
+            x -= 1;
+          }
+          break;
+
+        default:
+          int originalTile = x;
+          while (checkSpace(x, y) != '_') {
+            horizontalWord.append(this.board[x][y]);
+            x +=1;
+          }
+          while (checkSpace(originalTile, y) != '_') {
+            horizontalWord.insert(0, this.board[originalTile][y]);
+            originalTile -= 1;
+          }
+          break;
+      }
+
+      return horizontalWord.toString();
+    }
+
     /* view board */
 
     public void displayBoard() {

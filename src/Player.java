@@ -5,6 +5,7 @@ import java.util.Iterator;
 public class Player {
     private String name;
     private HashMap wordsPlayed;
+    private ArrayList<String> wordsBeingPlayed;
     public ArrayList<Character> rack;
 
    /* constructor */
@@ -62,5 +63,53 @@ public class Player {
         this.wordsPlayed.put(word, scoresArray);
       }
 
+    }
+
+    public boolean playSingleTile(char tile, char direction, int x, int y, Board board) {
+      Character tileObject = new Character(tile);
+
+      if (this.rack.contains(tileObject)) {
+        if (board.isSpaceOpen(x, y)) {
+
+          // check for combo vertical words being made if the word being made is horizontal
+
+          if (direction == 'r') {
+            String newVerticalWord = board.checkForVerticalWord(x, y);
+            if (newVerticalWord.length() != 1) {
+              this.wordsBeingPlayed.add(newVerticalWord);
+            }
+          } // check for combo horizontal words if word being made is vertical
+          else {
+            String newHorizontalWord = board.checkForHorizontalWord(x, y);
+            if (newHorizontalWord.length() != 1 ) {
+              this.wordsBeingPlayed.add(newHorizontalWord);
+            }
+          }
+
+          // add tile to the board
+          board.addTileToBoard(tile, x, y);
+          // remove the tile from the player's rack
+          this.rack.remove(tileObject);
+
+          // tile is successfully played, any words along the way are added to wordBeingPlayed
+          return true;
+        }
+      }
+      return false;
+    }
+
+    public void finshTurn(char direction, int x, int y, Board board) {
+      if (direction == 'r') {
+        String mainHorizontalWord = board.checkForHorizontalWord(x, y);
+        if (mainHorizontalWord.length() != 1) {
+          this.wordsBeingPlayed.add(mainHorizontalWord);
+        }
+      }
+      else {
+        String mainVerticalWord = board.checkForVerticalWord(x, y);
+        if (mainVerticalWord.length() != 1) {
+          this.wordsBeingPlayed.add(mainVerticalWord);
+        }
+      }
     }
 }
