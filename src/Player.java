@@ -125,6 +125,10 @@ public class Player {
     // validate all wordsBeingPlayed with the dictionary
 
     public boolean validateTurn() {
+      if (this.wordsBeingPlayed.size() == 0) {
+        return false;
+      }
+
       for (int i = 0; i < this.wordsBeingPlayed.size(); i++) {
         String word = this.wordsBeingPlayed.get(i);
         if (Game.isWordReal(word) != true) {

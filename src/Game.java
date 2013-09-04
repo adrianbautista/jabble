@@ -15,12 +15,15 @@ public class Game {
   private Player players[];
   private boolean gameOn;
   public static Board board;
+  private int turnCount;
+  private HashMap lastTilePlayed;
 
   public Game(String p1, String p2) {
     this.players = new Player[2];
     this.players[0] = new Player(p1);
     this.players[1] = new Player(p2);
     this.board = new Board();
+    this.turnCount = 0;
     gamePrompt();
   }
 
@@ -85,8 +88,14 @@ public class Game {
     return tiles;
   }
 
-  public static void getTile(Player player) {
-    player.rack.add(tileBag.remove(0));
+  public static boolean getTile(Player player) {
+    if (tileBag.size() > 0) {
+      player.rack.add(tileBag.remove(0));
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 
   private static HashSet<String> generateWordDictionary(Path path) {
@@ -155,6 +164,17 @@ public class Game {
     return points;
   }
 
+  public Player whoseTurn() {
+    if (this.turnCount % 2 == 0) {
+      this.turnCount += 1;
+      return this.players[0];
+    }
+    else {
+      this.turnCount += 1;
+      return this.players[1];
+    }
+  }
+
   public static Game initializationPrompt() {
     System.out.println("Welcome to Jabble");
     System.out.println("Player 1, please enter your name: ");
@@ -170,15 +190,88 @@ public class Game {
     gameOn = true;
     while (gameOn) {
         board.displayBoard();
-        System.out.println("(s)how your rack, show (g)ame board, (p)lay a word, (q)uit");
-        char arg = (scanner.next().charAt(0));
+        System.out.println("(s)how your rack, show (g)ame board, (p)lay a word, (f)inish game, (q)uit");
+        char arg = scanner.next().charAt(0);
+
         if ( arg == 'q') {
+            int score1 = this.players[0].getScore();
+            int score2 = this.players[1].getScore();
+            System.out.println("Player 1's score: " + score1);
+            System.out.println("Player 2's score: " + score2);
             gameOn = false;
+        }
+        if ( arg == 'p') {
+          if (this.turnCount == 0) {
+            Player currentPlayer = this.players[0];
+            playCenterTile(currentPlayer);
+          }
+          else {
+            Player currentPlayer = this.whoseTurn();
+            boolean turnCheck = true;
+            while (turnCheck == true) {
+              turnCheck = playPrompt(currentPlayer);
+            }
+
+            if (currentPlayer.validateTurn()) {
+              int tilesToGrab = 7 - currentPlayer.rack.size();
+              boolean tileAvailable = (tileBag.size() > 0);
+              while (tileAvailable) {
+                getTile(currentPlayer);
+              }
+            }
+          }
         }
         else if (arg == 'g') {
             board.displayBoard();
         }
     }
+  }
+
+  public boolean playPrompt(Player player) {
+    System.out.println("(a)dd tile or (f)inish turn?");
+    char arg = scanner.next().charAt(0);
+    if ( arg == 'a') {
+      this.board.displayBoard();
+      System.out.println("Do you want to make a (v)ertical or ho(r)izontal word?");
+      char direction = scanner.next().charAt(0);
+
+      System.out.println("Your rack: " + player.rack.toString());
+      System.out.println("Which tile?");
+      char tile = scanner.next().charAt(0);
+
+      System.out.println("Which row?");
+      int x = scanner.nextInt();
+
+      System.out.println("Which column?");
+      int y = scanner.nextInt();
+      player.playSingleTile(tile, direction, x, y, this.board);
+
+      this.lastTilePlayed.put('x', x);
+      this.lastTilePlayed.put('y', y);
+      this.lastTilePlayed.put('d', direction);
+
+      return true;
+    }
+    else {
+      int x = (int) this.lastTilePlayed.get('x');
+      int y = (int) this.lastTilePlayed.get('y');
+      char direction = (char) this.lastTilePlayed.get('d');
+      player.finshTurn(direction, x, y, this.board);
+
+      return false;
+    }
+  }
+
+  public void playCenterTile(Player player) {
+    this.board.displayBoard();
+    System.out.println("Do you want to make a (v)ertical or ho(r)izontal word?");
+    char direction = scanner.next().charAt(0);
+
+    System.out.println("Your rack: " + player.rack.toString());
+    System.out.println("Which tile?");
+    char tile = scanner.next().charAt(0);
+
+    player.playSingleTile(tile, direction, 0, 0, this.board);
   }
 
 }
