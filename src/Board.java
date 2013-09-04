@@ -148,7 +148,7 @@ public class Board {
     /* view board */
 
     public void displayBoard() {
-        String result = "      A B C D E F G H I J K L M N O\n\n";
+        String result = "      0 1 2 3 4 5 6 7 8 9 10 11 12 13 14\n\n";
         char[][] b = getBoard();
         for(int i = 0; i < ROWS; i++) {
             if (i < 10) {
@@ -184,7 +184,7 @@ public class Board {
                 result += "   " + i + "\n";
             }
         }
-        result += "\n      A B C D E F G H I J K L M N O\n";
+        result += "\n      0 1 2 3 4 5 6 7 8 9 10 11 12 13 14\n";
         System.out.println(result);
     }
 }

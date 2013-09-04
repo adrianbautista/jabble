@@ -105,6 +105,11 @@ public class Player {
       return false;
     }
 
+    public void playFirstTile(char tile, Board board) {
+      board.addTileToBoard(tile, 7, 7);
+      this.rack.remove(new Character(tile));
+    }
+
     // add the intended word being made by player to wordsBeingPlayed
 
     public void finshTurn(char direction, int x, int y, Board board) {

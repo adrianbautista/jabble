@@ -165,11 +165,9 @@ public class Game {
 
   public Player whoseTurn() {
     if (this.turnCount % 2 == 0) {
-      this.turnCount += 1;
       return this.players[0];
     }
     else {
-      this.turnCount += 1;
       return this.players[1];
     }
   }
@@ -201,28 +199,33 @@ public class Game {
             case 'r':
               System.out.println(currentPlayer.getRack().toString());
               break;
+
             case 'g':
               board.displayBoard();
               break;
+
             case 'p':
               if (this.turnCount == 0) {
                 playCenterTile(currentPlayer);
               }
-              else {
-                boolean turnCheck = true;
-                while (turnCheck == true) {
-                  turnCheck = playPrompt(currentPlayer);
-                }
-                if (currentPlayer.validateTurn()) {
-                  int tilesToGrab = 7 - currentPlayer.rack.size();
-                  boolean tileAvailable = (tileBag.size() > 0);
-                  while (tileAvailable) {
-                    getTile(currentPlayer);
-                  }
-                }
-                someonePlaying = false;
+
+              boolean turnCheck = true;
+              while (turnCheck == true) {
+                turnCheck = playPrompt(currentPlayer);
               }
+
+              if (currentPlayer.validateTurn()) {
+                int tilesToGrab = 7 - currentPlayer.rack.size();
+                boolean tileAvailable = (tileBag.size() > 0);
+                while (tileAvailable) {
+                  getTile(currentPlayer);
+                }
+              }
+
+              someonePlaying = false;
+              this.turnCount += 1;
               break;
+
             case 'q':
               int score1 = this.players[0].getScore();
               int score2 = this.players[1].getScore();
@@ -297,14 +300,13 @@ public class Game {
 
   public void playCenterTile(Player player) {
     this.board.displayBoard();
-    System.out.println("Do you want to make a (v)ertical or ho(r)izontal word?");
-    char direction = scanner.next().charAt(0);
+    System.out.println("Play the center tile first");
 
     System.out.println("Your rack: " + player.rack.toString());
     System.out.println("Which tile?");
     char tile = scanner.next().charAt(0);
 
-    player.playSingleTile(tile, direction, 0, 0, this.board);
+    player.playFirstTile(tile, this.board);
   }
 
 }
