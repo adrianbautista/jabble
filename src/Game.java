@@ -192,7 +192,55 @@ public class Game {
         Player currentPlayer = this.whoseTurn();
         System.out.println(currentPlayer.getName() + " it is your turn.");
 
-        System.out.println("(s)how your rack, show (g)ame board, (p)lay a word, (f)inish game, (q)uit");
+        boolean someonePlaying = true;
+
+        while (someonePlaying == true) {
+          System.out.println("Show your tile (r)ack, (g)ame board, (p)lay a word, (q)uit");
+          char arg = scanner.next().charAt(0);
+          switch (arg) {
+            case 'r':
+              currentPlayer.getRack().toString();
+              break;
+            case 'g':
+              board.displayBoard();
+              break;
+            case 'p':
+              if (this.turnCount == 0) {
+                playCenterTile(currentPlayer);
+              }
+              else {
+                boolean turnCheck = true;
+                while (turnCheck == true) {
+                  turnCheck = playPrompt(currentPlayer);
+                }
+                if (currentPlayer.validateTurn()) {
+                  int tilesToGrab = 7 - currentPlayer.rack.size();
+                  boolean tileAvailable = (tileBag.size() > 0);
+                  while (tileAvailable) {
+                    getTile(currentPlayer);
+                  }
+                }
+                someonePlaying = false;
+              }
+              break;
+            case 'q':
+              int score1 = this.players[0].getScore();
+              int score2 = this.players[1].getScore();
+              System.out.println("Player 1's score: " + score1);
+              System.out.println("Player 2's score: " + score2);
+              someonePlaying = false;
+              gameOn = false;
+              break;
+
+            default:
+              System.out.println("Did not compute, please try again");
+              break;
+          }
+
+        }
+
+
+        System.out.println("Show (g)ame board, (p)lay a word, (f)inish game, (q)uit");
         char arg = scanner.next().charAt(0);
 
         if ( arg == 'q') {
@@ -204,25 +252,7 @@ public class Game {
         }
         if ( arg == 'p') {
 
-          if (this.turnCount == 0) {
-            playCenterTile(currentPlayer);
-          }
-          else {
 
-            boolean turnCheck = true;
-            while (turnCheck == true) {
-              turnCheck = playPrompt(currentPlayer);
-            }
-
-            if (currentPlayer.validateTurn()) {
-              int tilesToGrab = 7 - currentPlayer.rack.size();
-              boolean tileAvailable = (tileBag.size() > 0);
-              while (tileAvailable) {
-                getTile(currentPlayer);
-              }
-            }
-
-          }
         }
         else if (arg == 'g') {
             board.displayBoard();
