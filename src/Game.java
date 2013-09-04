@@ -190,6 +190,9 @@ public class Game {
     gameOn = true;
     while (gameOn) {
         board.displayBoard();
+        Player currentPlayer = this.whoseTurn();
+        System.out.println(currentPlayer.getName() + " it is your turn.");
+
         System.out.println("(s)how your rack, show (g)ame board, (p)lay a word, (f)inish game, (q)uit");
         char arg = scanner.next().charAt(0);
 
@@ -201,12 +204,12 @@ public class Game {
             gameOn = false;
         }
         if ( arg == 'p') {
+
           if (this.turnCount == 0) {
-            Player currentPlayer = this.players[0];
             playCenterTile(currentPlayer);
           }
           else {
-            Player currentPlayer = this.whoseTurn();
+
             boolean turnCheck = true;
             while (turnCheck == true) {
               turnCheck = playPrompt(currentPlayer);
@@ -219,6 +222,7 @@ public class Game {
                 getTile(currentPlayer);
               }
             }
+
           }
         }
         else if (arg == 'g') {
