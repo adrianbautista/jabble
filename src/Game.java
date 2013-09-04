@@ -217,9 +217,10 @@ public class Game {
 
               if (currentPlayer.validateTurn()) {
                 int tilesToGrab = 7 - currentPlayer.rack.size();
-                boolean tileAvailable = (tileBag.size() > 0);
-                while (tileAvailable) {
+                while (tilesToGrab > 0) {
                   getTile(currentPlayer);
+                  tilesToGrab -= 1;
+
                 }
               }
 
