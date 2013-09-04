@@ -199,7 +199,7 @@ public class Game {
           char arg = scanner.next().charAt(0);
           switch (arg) {
             case 'r':
-              currentPlayer.getRack().toString();
+              System.out.println(currentPlayer.getRack().toString());
               break;
             case 'g':
               board.displayBoard();
