@@ -276,10 +276,10 @@ public class Game {
       char tile = scanner.next().charAt(0);
 
       System.out.println("Which row?");
-      int x = scanner.nextInt();
+      int y = scanner.nextInt();
 
       System.out.println("Which column?");
-      int y = scanner.nextInt();
+      int x = scanner.nextInt();
       player.playSingleTile(tile, direction, x, y, this.board);
 
       this.lastTilePlayed.put('x', x);

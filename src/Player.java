@@ -88,7 +88,8 @@ public class Player {
           } // check for combo horizontal words if word being made is vertical
           else {
             String newHorizontalWord = board.checkForHorizontalWord(x, y);
-            if (newHorizontalWord.length() != 1 ) {
+            int test = newHorizontalWord.length();
+            if (test > 1) {
               this.wordsBeingPlayed.add(newHorizontalWord);
             }
           }
