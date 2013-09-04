@@ -13,11 +13,14 @@ public class Game {
   public static final HashMap<Character, Integer> pointGuide = generatePointGuide();
   public static Scanner scanner = new Scanner(System.in);
   private Player players[];
+  private boolean gameOn;
+  public static Board board;
 
   public Game(String p1, String p2) {
     this.players = new Player[2];
     this.players[0] = new Player(p1);
     this.players[1] = new Player(p2);
+    this.board = new Board();
     gamePrompt();
   }
 
@@ -163,8 +166,17 @@ public class Game {
     return new Game(player1Name, player2Name);
   }
 
-  public static void gamePrompt() {
-    System.out.println("(s)how your rack, show (g)ame board, (p)lay a word, (q)uit");
+  public void gamePrompt() {
+    gameOn = true;
+    while (gameOn) {
+        board.displayBoard();
+        System.out.println("(s)how your rack, show (g)ame board, (p)lay a word, (q)uit");
+        char arg = (scanner.next().charAt(0));
+        if ( arg == 'q') {
+            gameOn = false;
+        }
+
+    }
   }
 
 }
