@@ -175,7 +175,9 @@ public class Game {
         if ( arg == 'q') {
             gameOn = false;
         }
-
+        else if (arg == 'g') {
+            board.displayBoard();
+        }
     }
   }
 
