@@ -10,7 +10,7 @@ public class Player {
 
    /* constructor */
    public Player(String name) {
-       name = name;
+       this.name = name;
        this.rack = new ArrayList<Character>(7);
        for (int i = 0; i < 7; i++) {
            Game.getTile(this);

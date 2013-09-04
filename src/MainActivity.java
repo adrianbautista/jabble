@@ -1,5 +1,6 @@
 public class MainActivity {
   public static void main(String[] args) {
-    Game.initializationPrompt();
+    Game newJabble = Game.initializationPrompt();
+    newJabble.gamePrompt();
   }
 }

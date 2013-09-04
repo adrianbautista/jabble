@@ -24,7 +24,6 @@ public class Game {
     this.players[1] = new Player(p2);
     this.board = new Board();
     this.turnCount = 0;
-    gamePrompt();
   }
 
   public static boolean isWordReal(String word) {
