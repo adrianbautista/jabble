@@ -16,6 +16,7 @@ public class Player {
            Game.getTile(this);
        }
        this.wordsPlayed = new HashMap();
+       this.wordsBeingPlayed = new ArrayList<String>();
    }
 
     public int getScore() {
