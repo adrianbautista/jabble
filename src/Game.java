@@ -24,6 +24,7 @@ public class Game {
     this.players[1] = new Player(p2);
     this.board = new Board();
     this.turnCount = 0;
+    this.lastTilePlayed = new HashMap();
   }
 
   public static boolean isWordReal(String word) {
